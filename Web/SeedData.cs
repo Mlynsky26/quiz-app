@@ -20,10 +20,10 @@ public static class SeedData
             var t1 = quizRepo.Add(new Quiz(1, q1, "Quiz pierwszy"));            
             
             var q2 = new List<QuizItem>();
-            q2.Add(quizItemRepo.Add(new QuizItem(1, "2-2", new List<string>(){"-2", "13", "2"}, "0")));
-            q2.Add(quizItemRepo.Add(new QuizItem(2, "0+2", new List<string>(){"14", "3", "0"}, "2")));
-            q2.Add(quizItemRepo.Add(new QuizItem(3, "2+12", new List<string>(){"2", "4", "15"}, "14")));
-            q2.Add(quizItemRepo.Add(new QuizItem(4, "9+9", new List<string>(){"8", "10", "16"}, "18")));
+            q2.Add(quizItemRepo.Add(new QuizItem(5, "2-2", new List<string>(){"-2", "13", "2"}, "0")));
+            q2.Add(quizItemRepo.Add(new QuizItem(6, "0+2", new List<string>(){"14", "3", "0"}, "2")));
+            q2.Add(quizItemRepo.Add(new QuizItem(7, "2+12", new List<string>(){"2", "4", "15"}, "14")));
+            q2.Add(quizItemRepo.Add(new QuizItem(8, "9+9", new List<string>(){"8", "10", "16"}, "18")));
             var t2 = quizRepo.Add(new Quiz(2, q2, "Quiz drugi"));
         }
     }

@@ -39,16 +39,17 @@ namespace BackendLab01.Pages
             Answers = new List<string>();
             if (quizItem is not null)
             {
-                Answers.AddRange(quizItem?.IncorrectAnswers);
-                Answers.Add(quizItem?.CorrectAnswer);
+                Answers.AddRange(quizItem.IncorrectAnswers);
+                Answers.Add(quizItem.CorrectAnswer);
             }
         }
 
-        public IActionResult OnPost(string userAnswer)
+        public IActionResult OnPost()
         {
-            UserAnswer = userAnswer;
             var quiz = _userService.FindQuizById(QuizId);
-            if(quiz.Items.Count <= ItemId)
+            var quizItem = quiz?.Items[ItemId - 1];
+            _userService.SaveUserAnswerForQuiz(QuizId, 1, quizItem.Id, UserAnswer);
+            if (quiz.Items.Count <= ItemId)
                 return RedirectToPage("Summary", new {quizId = QuizId});
             return RedirectToPage("Item", new {quizId = QuizId, itemId = ItemId + 1});
         }

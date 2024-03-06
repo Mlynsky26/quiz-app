@@ -1,8 +1,64 @@
 ﻿@page "{quizId}"
 @model BackendLab01.Pages.Summary
 @{
-    ViewData["Title"] = "summary";
+    ViewData["Title"] = "Summary";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<H3>@ViewData["Title"]</H3>
+@if (Model.Quiz is not null)
+{
+
+    <H3>@ViewData["Title"] of quiz @Model.Quiz.Title</H3>
+
+    @if (Model.QuizAnswers is not null && Model.QuizAnswers.Count != 0)
+    {
+        <h4>Your score: @Model.QuizAnswers.FindAll(answer => answer.IsCorrect()).Count / @Model.Quiz.Items.Count</h4>
+
+        @foreach (var question in Model.Quiz.Items)
+        {
+            var item = Model.QuizAnswers.Find(answer => answer.QuizItem.Id == question.Id);
+            <div class="fw-bold">
+                <h4>@question.Question</h4>
+                @if (item is not null)
+                {
+
+                    @if (item.IsCorrect())
+                    {
+                        <div>
+                            <p>
+                                Your answer
+                                <span class="text-success">@item.Answer <i class="bi bi-check-lg"></i></span>
+                            </p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="d-flex gap-3">
+                            <p>
+                                Your answer <span class="text-danger">@item.Answer <i class="bi bi-x-lg"></i></span>
+                            </p>
+                            <p>
+                                Correct answer <span class="text-success">@question.CorrectAnswer <i class="bi bi-check-lg"></i></span>
+                            </p>
+                        </div>
+                    }
+
+                }
+                else
+                {
+                    <p>No answer</p>
+                }
+            </div>
+        }
+
+    }
+    else
+    {
+        <h4>No answers</h4>
+    }
+
+}
+else
+{
+    <h3>No Quiz</h3>
+}
