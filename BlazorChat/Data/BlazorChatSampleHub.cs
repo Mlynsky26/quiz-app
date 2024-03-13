@@ -13,6 +13,11 @@ namespace BlazorChat
             await Clients.All.SendAsync("Broadcast", username, message);
         }
 
+        public async Task Private(string from, string to, string message)
+        {
+            await Clients.Client(to).SendAsync("Private", from, message);
+        }
+
         public override Task OnConnectedAsync()
         {
             Console.WriteLine($"{Context.ConnectionId} connected");
