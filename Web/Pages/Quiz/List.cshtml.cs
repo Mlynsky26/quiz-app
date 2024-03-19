@@ -7,12 +7,12 @@ namespace BackendLab01.Pages
     
     public class QuizList : PageModel
     {
-        private readonly IQuizAdminService _adminService;
+        private readonly IQuizUserService _userService;
 
         private readonly ILogger _logger;
-        public QuizList(IQuizAdminService adminService, ILogger<QuizList> logger)
+        public QuizList(IQuizUserService userService, ILogger<QuizList> logger)
         {
-            _adminService = adminService;
+            _userService = userService;
             _logger = logger;
         }
         
@@ -21,7 +21,7 @@ namespace BackendLab01.Pages
 
         public void OnGet()
         {
-            Quizzes = _adminService.FindAllQuizzes();
+            Quizzes = _userService.FindAllQuizzes();
         }
     }
 }

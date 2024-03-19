@@ -11,6 +11,7 @@ public interface IQuizUserService
     void SaveUserAnswerForQuiz(int quizId, int userId, int quizItemId, string answer);
 
     List<QuizItemUserAnswer> GetUserAnswersForQuiz(int quizId, int userId);
+    public List<Quiz> FindAllQuizzes();
 
     int CountCorrectAnswersForQuizFilledByUser(int quizId, int userId)
     {
