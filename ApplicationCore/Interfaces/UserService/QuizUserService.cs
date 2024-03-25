@@ -3,7 +3,7 @@ using ApplicationCore.Interfaces.Repository;
 
 namespace BackendLab01;
 
-public class QuizUserService: IQuizUserService
+public class QuizUserService : IQuizUserService
 {
     private readonly IGenericRepository<Quiz, int> quizRepository;
     private readonly IGenericRepository<QuizItem, int> itemRepository;
@@ -42,8 +42,9 @@ public class QuizUserService: IQuizUserService
         //     .ToList();
         return answerRepository.FindBySpecification(new QuizItemsForQuizIdFilledByUser(quizId, userId)).ToList();
     }
-    
+
     public List<Quiz> FindAllQuizzes()
-    { return quizRepository.FindAll();
+    {
+        return quizRepository.FindAll();
     }
 }
