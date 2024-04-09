@@ -17,7 +17,9 @@ namespace WebApi.Mapper
                     q => q.Items,
                     op => op.MapFrom<List<QuizItem>>(i => i.Items)
                 );
-            CreateMap<NewQuizDTO, Quiz>();
+            CreateMap<NewQuizDTO, Quiz>().AfterMap((src, desc) => {
+                src.Title = desc.Title;
+            });
         }
     }
 }
