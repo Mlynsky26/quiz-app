@@ -2,8 +2,10 @@ using ApplicationCore.Interfaces.Repository;
 using BackendLab01;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Infrastructure;
 using Infrastructure.Memory;
 using Infrastructure.Memory.Repository;
+using Infrastructure.Services;
 using WebApi.Valiadtors;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,12 +17,10 @@ builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<QuizDbContext>();
 builder.Services.AddTransient<IGenericGenerator<int>, IntGenerator>();
-builder.Services.AddSingleton<IGenericRepository<Quiz, int>, MemoryGenericRepository<Quiz, int>>();
-builder.Services.AddSingleton<IGenericRepository<QuizItem, int>, MemoryGenericRepository<QuizItem, int>>();
-builder.Services.AddSingleton<IGenericRepository<QuizItemUserAnswer, string>, MemoryGenericRepository<QuizItemUserAnswer, string>>();
-builder.Services.AddSingleton<IQuizUserService, QuizUserService>();
-builder.Services.AddSingleton<IQuizAdminService, QuizAdminService>();
+builder.Services.AddTransient<IQuizUserService, QuizUserServiceEF>();
+//builder.Services.AddSingleton<IQuizAdminService, QuizAdminService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddScoped<IValidator<QuizItem>, QuizItemValidator>();
@@ -36,5 +36,4 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.MapControllers();
-app.Seed();
 app.Run();

@@ -20,7 +20,7 @@ namespace Infrastructure
         {
             base.OnConfiguring(optionsBuilder);
             optionsBuilder.UseSqlServer(
-                "DATA SOURCE=...;DATABASE=...;Integrated Security=true;TrustServerCertificate=True");
+                "DATA SOURCE=localhost;DATABASE=mm_quizapp;Integrated Security=true;TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
