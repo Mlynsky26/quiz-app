@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using BackendLab01;
 using WebApi.DTO;
 using WebApi.Mapper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controller;
 
@@ -31,6 +32,7 @@ public class WebApiUserQuiz : ControllerBase
         }
 
         [HttpPost]
+        [Authorize(Policy = "Bearer")]
         [Route("{quizId}/items/{itemId}/answers")]
         public ActionResult SaveUserAnswer([FromBody] SaveAnswerDTO body, int quizId, int itemId)
         {
@@ -49,14 +51,15 @@ public class WebApiUserQuiz : ControllerBase
         [Route("{quizId}/answers/{userId}")]
         public ActionResult<List<QuizItemUserAnswer>> GetUserAnswer(int quizId, int userId)
         {
-            //try
-            //{
+            try
+            {
                 var result = _service.GetUserAnswersForQuiz(quizId, userId);
-                return Ok(result);
-            //}catch (Exception ex)
-            //{
-            //    return NotFound(ex.Message);
-            //}
+                    return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
 

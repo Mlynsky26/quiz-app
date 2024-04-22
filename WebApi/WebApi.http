@@ -1,8 +1,10 @@
 
 
-GET http://localhost:5256/api/v1/user/quizzes/1
-Accept: application/json
+POST  https://localhost:7077/api/v1/quizzes/1/items/1/answer
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoia2Fyb2wiLCJnZW5kZXIiOiJtYWxlIiwiZW1haWwiOiJrYXJvbEB3c2VpLmVkdS5wbCIsImV4cCI6MTcxMzI3ODgxNywianRpIjoiZTNhNDFlZWYtZTUxMy00ZTJlLThmYzgtMTM5NmRmMTRlZjcwIiwiYXVkIjoid3NlaSIsImlzcyI6IndzZWkifQ.ulIeL7DBSdmJrAcQj7nYTJYqL8RPVdo_w_UdS6AdvBM
 
-###
-
-
+{
+  "userId": 1,
+  "answer": "5"
+}

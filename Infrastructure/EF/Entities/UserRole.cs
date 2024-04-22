@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.EF.Entities
 {
-    public class UserEntity : IdentityUser<int>
+    public class UserRole : IdentityRole<int>
     {
     }
 }
